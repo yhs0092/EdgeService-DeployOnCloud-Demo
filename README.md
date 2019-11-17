@@ -2,6 +2,12 @@
 
 微服务网关是微服务集群对外的边界，在微服务架构中扮演着重要的作用。本文主要介绍使用ServiceStage的功能将EdgeService微服务网关打包为docker镜像，部署在云上，并将微服务接口暴露到外网的方法。
 
+阅读本篇文档，您需要具备的基础知识和预先准备的内容包括：
+- Java：了解Java语言编程知识
+- maven：了解maven插件，能够使用mvn构建命令打包
+- docker：了解Dockerfile的写法
+- 华为云服务资源：需要ServiceComb引擎实例一个、CCE集群一个，确保SWR镜像仓库服务可用。
+
 ## Demo 说明
 
 本文基于[21天转型微服务实战营](https://education.huaweicloud.com:8443/courses/course-v1:HuaweiX+CBUCNXP012+Self-paced/about?isAuth=0&cfrom=hwc)第六天的课程demo进行演示，读者可以前往对应的ServiceStage [Demo库](https://github.com/servicestage-demo/microservice-dev-training21days/tree/day6_ppt)下载源码。
