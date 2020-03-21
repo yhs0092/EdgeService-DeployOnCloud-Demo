@@ -9,12 +9,19 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <cse.version>2.3.62</cse.version>
+    <cse.version>2.5.0</cse.version>
     <main.class>microservice.demo.training21days.edge.AppMain</main.class>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.apache.servicecomb</groupId>
+        <artifactId>java-chassis-dependencies</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>com.huawei.paas.cse</groupId>
         <artifactId>cse-dependency</artifactId>
@@ -27,8 +34,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.huawei.paas.cse</groupId>
-      <artifactId>cse-solution-service-engine</artifactId>
+      <groupId>org.apache.servicecomb</groupId>
+      <artifactId>solution-basic</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.servicecomb</groupId>

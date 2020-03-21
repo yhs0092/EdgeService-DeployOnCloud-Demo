@@ -5,17 +5,21 @@ service_description:
 cse:
   service:
     registry:
-      address: https://cse.cn-north-1.myhuaweicloud.com:443
+      address: http://127.0.0.1:30100
       instance:
-        watch: false
-  config:
-    client:
-      serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
-      refreshMode: 1
-      refresh_interval: 5000
+        watch: true
+        pull:
+          interval: 30
+
+#  config:
+#    client:
+#      serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
+#      refreshMode: 1
+#      refresh_interval: 5000
   monitor:
     client:
       serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
+      enabled: false
   rest:
     address: 0.0.0.0:8000
 
@@ -35,6 +39,13 @@ cse:
           withVersion: true      # 请求带版本号，例如v1表示[1.0.0,2.0.0)范围内的微服务版本
           # prefixSegmentCount默认值就是1，这里只是展示一下，实际上可以省略该配置
           prefixSegmentCount: 1  # 前缀长度，例如/rest/provider/v0/hello/Bob，去掉第一段，将/provider/v0/hello/Bob转发到后端
+
+  loadbalance:
+    provider:
+      transactionControl:
+        options:
+          tags:
+            cluster: d0
 
 #  http:
 #    dispatcher:
@@ -56,3 +67,54 @@ cse:
   accesslog:
     enabled: true
     pattern: "%h - - %t cs-uri %s %B %D %SCB-traceId"
+
+#########SSL options
+ssl.sc.consumer.protocols: TLSv1.2
+ssl.sc.consumer.authPeer: true
+ssl.sc.consumer.checkCN.host: false
+
+#########certificates config
+ssl.sc.consumer.trustStore: trust.jks
+ssl.sc.consumer.trustStoreType: JKS
+ssl.sc.consumer.trustStoreValue: "aaaaaa"
+ssl.sc.consumer.keyStore: server.p12
+ssl.sc.consumer.keyStoreType: PKCS12
+ssl.sc.consumer.keyStoreValue: "aaaaaa"
+ssl.sc.consumer.crl: revoke.crl
+ssl.sc.consumer.sslCustomClass: microservice.demo.training21days.tls.DemoSSLCustomN0
+
+#########SSL options
+ssl.sc2.consumer.protocols: TLSv1.2
+ssl.sc2.consumer.authPeer: true
+ssl.sc2.consumer.checkCN.host: false
+
+#########certificates config
+ssl.sc2.consumer.trustStore: trust.jks
+ssl.sc2.consumer.trustStoreType: JKS
+ssl.sc2.consumer.trustStoreValue: "aaaaaa"
+ssl.sc2.consumer.keyStore: server.p12
+ssl.sc2.consumer.keyStoreType: PKCS12
+ssl.sc2.consumer.keyStoreValue: "aaaaaa"
+ssl.sc2.consumer.crl: revoke.crl
+ssl.sc2.consumer.sslCustomClass: microservice.demo.training21days.tls.DemoSSLCustomN1
+
+servicecomb:
+  metrics:
+    Consumer:
+      invocation:
+        slow:
+          enabled: false
+    Provider:
+      invocation:
+        slow:
+          enabled: false
+    publisher:
+      defaultLog:
+        enabled: false
+        endpoints:
+          client:
+            detail:
+              enabled: false
+  boot:
+    turnDown:
+      waitInSeconds: 0

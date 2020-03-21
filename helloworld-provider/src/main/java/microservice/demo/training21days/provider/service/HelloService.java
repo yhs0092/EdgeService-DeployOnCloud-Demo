@@ -5,6 +5,7 @@ import java.util.Date;
 import org.apache.servicecomb.provider.rest.common.RestSchema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,8 +34,8 @@ public class HelloService {
     return sayHelloPrefix.getValue() + name;
   }
 
-  @PostMapping(path = "/greeting")
-  public GreetingResponse greeting(@RequestBody Person person) {
+  @GetMapping(path = "/greeting")
+  public GreetingResponse greeting(Person person) {
     GreetingResponse greetingResponse = new GreetingResponse();
 
     if (Gender.MALE.equals(person.getGender())) {

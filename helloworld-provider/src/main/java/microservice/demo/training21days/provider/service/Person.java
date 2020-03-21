@@ -9,16 +9,18 @@ public class Person {
     return name;
   }
 
-  public void setName(String name) {
+  public Person setName(String name) {
     this.name = name;
+    return this;
   }
 
   public Gender getGender() {
     return gender;
   }
 
-  public void setGender(Gender gender) {
+  public Person setGender(Gender gender) {
     this.gender = gender;
+    return this;
   }
 
   @Override

@@ -11,16 +11,18 @@ public class GreetingResponse {
     return msg;
   }
 
-  public void setMsg(String msg) {
+  public GreetingResponse setMsg(String msg) {
     this.msg = msg;
+    return this;
   }
 
   public Date getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Date timestamp) {
+  public GreetingResponse setTimestamp(Date timestamp) {
     this.timestamp = timestamp;
+    return this;
   }
 
   @Override

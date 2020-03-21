@@ -2,20 +2,25 @@ APPLICATION_ID: Training21Days-HelloWorld  # 应用Id 是微服务的一个隔�
 service_description:
   name: provider            # 微服务名称，同应用下的不同微服务需要有不同的名称
   version: 0.0.1            # 微服务版本
+instance_description:
+  properties:
+    tags:
+      cluster: d1
 cse:
   service:
     registry:
-      address: https://cse.cn-north-1.myhuaweicloud.com:443
+      address: http://127.0.0.1:30100
       instance:
-        watch: false        # 使用pull模式连接服务中心
-  config:
-    client:
-      serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
-      refreshMode: 1        # 使用pull模式连接配置中心
-      refresh_interval: 5000
+        watch: true        # 使用pull模式连接服务中心
+#  config:
+#    client:
+#      serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
+#      refreshMode: 1        # 使用pull模式连接配置中心
+#      refresh_interval: 5000
   monitor:                  # 只有从本地接入云上CSE时需要配置monitor地址，云上集群部署时可以通过服务发现接入monitor
     client:
       serverUri: https://cse.cn-north-1.myhuaweicloud.com:443
+      enabled: false
   rest:
     address: 0.0.0.0:8080   # 本服务监听的地址
 
@@ -32,3 +37,36 @@ cse:
 
 hello:
   sayHelloPrefix: "Hello "
+
+#########SSL options
+ssl.sc.consumer.protocols: TLSv1.2
+ssl.sc.consumer.authPeer: true
+ssl.sc.consumer.checkCN.host: false
+
+#########certificates config
+ssl.sc.consumer.trustStore: trust.jks
+ssl.sc.consumer.trustStoreType: JKS
+ssl.sc.consumer.trustStoreValue: "aaaaaa"
+ssl.sc.consumer.keyStore: server.p12
+ssl.sc.consumer.keyStoreType: PKCS12
+ssl.sc.consumer.keyStoreValue: "aaaaaa"
+ssl.sc.consumer.crl: revoke.crl
+ssl.sc.consumer.sslCustomClass: microservice.demo.training21days.tls.DemoSSLCustomN0
+
+servicecomb:
+  metrics:
+    Consumer:
+      invocation:
+        slow:
+          enabled: false
+    Provider:
+      invocation:
+        slow:
+          enabled: false
+    publisher:
+      defaultLog:
+        enabled: false
+        endpoints:
+          client:
+            detail:
+              enabled: false
